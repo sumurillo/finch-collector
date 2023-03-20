@@ -44,15 +44,8 @@ class FinchDelete(DeleteView):
   success_url = '/finches'
 
 def add_feeding(request, finch_id):
-  # create a ModelForm instance using 
-  # the data that was submitted in the form
   form = FeedingForm(request.POST)
-  # validate the form
   if form.is_valid():
-    # We want a model instance, but
-    # we can't save to the db yet
-    # because we have not assigned the
-    # finch_id FK.
     new_feeding = form.save(commit=False)
     new_feeding.finch_id = finch_id
     new_feeding.save()
